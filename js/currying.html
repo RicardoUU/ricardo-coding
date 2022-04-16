@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+
+
+</body>
+<script>
+  function add() {
+  // 第一次执行时，定义一个数组专门用来存储所有的参数
+  const argList = Array.from(arguments)
+
+  // 在内部声明一个函数，利用闭包的特性保存_args并收集所有的参数值
+  const collect = function () {
+    // argList.push(...arguments)
+    if(arguments.length) 
+    {
+      argList.push(...arguments)
+      return collect
+    }else{
+      return argList.reduce((a, b) => a + b, 0)
+    }
+  }
+  // 利用隐式转换的特性，当最后执行时隐式转换，并计算最终的值返回
+  // collect.toString = function () {
+  //   return 0+argList.reduce((a, b) => a + b, 0)
+  // }
+
+  return collect
+}
+
+
+
+function add() {
+  // 第一次执行时，定义一个数组专门用来存储所有的参数
+  const argList = Array.from(arguments)
+  
+  const collect = function () {
+    // argList.push(...arguments)
+    if(arguments.length) 
+    {
+      argList.push(...arguments);
+      return collect
+    }else{
+      return argList.reduce((a, b) => a + b, 0);
+    }
+  }
+  return collect
+}
+
+
+// 测试
+console.log(add(1)(2)(3)()) // 6
+console.log(add(1, 2, 3)(4)) // 10;
+console.log(add(1)(2)(3)(4)(5)) // 15;
+
+var a = add(1)(2)(3)(4) // f 10
+var b = add(1, 2, 3, 4) // f 10
+var c = add(1, 2)(3, 4) // f 10
+var d = add(1, 2, 3)(4) // f 10
+
+// 可以利用隐式转换的特性参与计算
+console.log(a + 10) // 20
+console.log(b + 20) // 30
+console.log(c + 30) // 40
+console.log(d + 40) // 50
+
+// 也可以继续传入参数，得到的结果再次利用隐式转换参与计算
+console.log(a(10) + 100) // 120
+console.log(b(10) + 100) // 120
+console.log(c(10) + 100) // 120
+console.log(d(10) + 100) // 120
+
+</script>
+</html>
+
+
+
