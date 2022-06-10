@@ -54,12 +54,17 @@ function createData(deep, breadth) {
   }
   return data;
 }
+
+
+
 // 获取类型
 function getType(attr) {
   let type = Object.prototype.toString.call(attr);
   let newType = type.substr(8, type.length - 9);
   return newType;
 }
+
+
 // 判断是否为引用类型
 function isObject(value) {
   // 储存传入值的类型
@@ -67,6 +72,8 @@ function isObject(value) {
   // 过滤null
   return value != null && (type === "object" || type === "function");
 }
+
+
 // 克隆function
 function cloneFunc(value) {
   const isFunc = typeof value === "function";
@@ -99,6 +106,10 @@ function cloneStatic(target) {
   return new Ctor(target);
 }
 // <!------------工具函数结束----------------------------!>
+
+
+
+
 // <!------------克隆逻辑开始----------------------------!>
 // 声明一个函数
 function cloneDeep(target, map = new WeakMap()) {
@@ -146,6 +157,7 @@ function cloneDeep(target, map = new WeakMap()) {
     });
     return newTarget;
   }
+
   // 拷贝Set
   if (getType(target) === "Set") {
     // 循环复制到新Map
